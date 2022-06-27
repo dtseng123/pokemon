@@ -14,7 +14,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material"
-import { Navigate, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import pokedexLogo from "../images/pokedex-logo.png"
 import axios from "axios"
 
@@ -28,7 +28,7 @@ export const PokemonCard = () => {
       const response = await axios.get(URL, {})
       setDetails(response.data)
     },
-    [URL]
+    []
   )
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const PokemonCard = () => {
       const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`
       getPokemonDetails(url)
     }
-  }, [])
+  }, [getPokemonDetails, pokemon])
   return (
     <>
       <CssBaseline />

@@ -1,9 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { mount } from '@cypress/react';
 import App from './App';
+import Pokedex from './components/Pokedex';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+  it('renders App div', () => {
+    mount(<App />);
+    cy.get('div').should('have.class', 'App');
+  })
+
+
+  it('renders Pokedex', () => {
+    mount(<Pokedex />);
+    cy.get('span').should('have.class', 'MuiChip-label');
+  })
+
+ 

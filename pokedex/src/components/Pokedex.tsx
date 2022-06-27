@@ -15,7 +15,7 @@ import axios from "axios"
 import { Autocomplete, TextField } from "@mui/material"
 import { PokemonList } from "./PokemonList"
 import { SearchList } from "../SearchList"
-import { useNavigate } from "react-router-dom"
+ 
 
 const theme = createTheme()
 
@@ -30,18 +30,20 @@ export interface PokemonResource {
   results: PokemonResourceResults[]
 }
 
-export const Pokedex = () => {
+export const Pokedex = (props:any) => {
+  let {navigate} = props;
+
   const [pokemon, setPokemon] = useState<PokemonResource>()
   const [searchTerm, setSearchTerm] = useState<string>("")
 
-  let navigate = useNavigate();
+
   // Query list of pokemon
   const getPokemon = useCallback(
     async (URL: string) => {
       const response = await axios.get(URL, {})
       setPokemon(response.data)
     },
-    [URL]
+    []
   )
 
   // For pagination - switch pages
@@ -59,7 +61,7 @@ export const Pokedex = () => {
     // first time query
     const URL = "https://pokeapi.co/api/v2/pokemon/"
     getPokemon(URL)
-  }, [])
+  }, [getPokemon])
 
   return (
     <ThemeProvider theme={theme}>
@@ -132,7 +134,7 @@ export const Pokedex = () => {
         <Container sx={{ py: 8 }} maxWidth="lg">
       
           <Grid container spacing={2} justifyContent="center">
-            <PokemonList pokemon={pokemon?.results} />
+            <PokemonList pokemon={pokemon?.results} navigate={navigate} />
             <Pagination count={57} color="primary" onChange={switchPage} />
           </Grid>
         </Container>
