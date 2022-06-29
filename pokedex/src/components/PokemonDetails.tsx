@@ -63,7 +63,7 @@ export const PokemonCard = () => {
                 justifyContent: "center",
               }}
             >
-              <Typography gutterBottom variant="h4" component="h2">
+              <Typography gutterBottom variant="h4" component="h2"id="pokemon-name">
                 {pokemon}
               </Typography>
               {details?.sprites &&
@@ -113,6 +113,7 @@ export const PokemonCard = () => {
                       key={index}
                       label={ability.ability.name}
                       variant="outlined"
+                      id={ `${ability.ability.name}-${index}`}
                     />
                   ))}
                 </Grid>
@@ -125,6 +126,7 @@ export const PokemonCard = () => {
                       key={index}
                       label={move.move.name}
                       variant="outlined"
+                      id={ `${move.move.name}-${index}`}
                     />
                   ))}
                 </Grid>
